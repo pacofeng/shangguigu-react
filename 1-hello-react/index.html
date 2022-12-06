@@ -22,7 +22,7 @@
 
     <script type="text/babel">
       const myData = 'this is data';
-      // 1. 创建虚拟DOM
+      // 1.1 使用jsx创建虚拟DOM
       const element = (
         <h1 id='title'>
           <span className='sss' style={{ fontSize: '50px' }}>
@@ -30,9 +30,21 @@
           </span>
         </h1>
       );
+
+      // 1.2 使用js创建虚拟DOM
+      const element2 = React.createElement('ul', { id: 'library' }, [
+        React.createElement('li', { id: 'react' }, 'Hello React'),
+        React.createElement('li', { id: 'vue' }, 'Hello Vue'),
+      ]);
+
       // 2. 渲染虚拟DOM到页面
       const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(element);
+      root.render(
+        <>
+          {element}
+          {element2}
+        </>
+      );
     </script>
   </body>
 </html>
