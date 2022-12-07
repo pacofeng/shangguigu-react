@@ -19,6 +19,7 @@
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
 
     <script type="text/babel">
       class Weather extends React.Component {
@@ -32,9 +33,19 @@
         }
       }
 
+      // 类型和必要性的限制
+      Weather.propTypes = {
+        date: PropTypes.string.isRequired,
+        isHot: PropTypes.bool,
+      };
+
+      // 制定默认值
+      Weather.defaultProps = {
+        isHot: true,
+      };
+
       const data = {
         date: '01/01/2022',
-        isHot: true,
       };
 
       const root = ReactDOM.createRoot(document.getElementById('root'));
