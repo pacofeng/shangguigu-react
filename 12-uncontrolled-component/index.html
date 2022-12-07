@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Login extends React.Component {
+        onFormSubmit = (event) => {
+          event.preventDefault();
+          console.log(this.name.value, this.password.value);
+        };
+
+        render() {
+          return (
+            <form onSubmit={this.onFormSubmit}>
+              <div>
+                <label>Name</label>
+                <input
+                  ref={(current) => (this.name = current)}
+                  type='text'
+                  name='name'
+                />
+              </div>
+              <div>
+                <label>Password</label>
+                <input
+                  ref={(current) => (this.password = current)}
+                  type='password'
+                  name='password'
+                />
+              </div>
+              <input type='submit' value='Submit' />
+            </form>
+          );
+        }
+      }
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<Login />);
+    </script>
+  </body>
+</html>
