@@ -22,25 +22,19 @@
 
     <script type="text/babel">
       class Weather extends React.Component {
-        // 构造器只会调用1次
-        constructor(props) {
-          super(props);
-          this.state = {
-            isHot: true,
-          };
-          // 解决changeWeather中的this指向问题
-          this.changeWeather = this.changeWeather.bind(this);
-        }
+        // 类中可以直接写赋值语句，以下代码含义是给Weather的实例对象添加一个属性state
+        state = {
+          isHot: true,
+        };
 
-        changeWeather() {
-          // 由于changeWeather是onClick的回调函数，它不是通过实例调用的，而是直接调用
-          // 再加上类中的方法默认开启了局部严格模式，所以changeWeather中的this是undefined
+        // 类中可以直接写赋值语句，以下代码含义是给Weather的实例对象添加一个方法changeWeather
+        changeWeather = () => {
+          // 箭头函数没有自己的this，它会去找外层函数的this，就是Weather的实例对象
           this.setState({
             isHot: !this.state.isHot,
           });
-        }
+        };
 
-        // render会调用1 + n次，1是初始化的时候调用，n就是每一次修改state的时候调用
         render() {
           return (
             <h1 onClick={this.changeWeather}>
