@@ -27,6 +27,8 @@
           this.state = {
             isHot: true,
           };
+          // 解决changeWeather中的this指向问题
+          this.changeWeather = this.changeWeather.bind(this);
         }
 
         changeWeather() {
