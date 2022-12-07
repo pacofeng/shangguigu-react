@@ -29,8 +29,20 @@
           };
         }
 
+        changeWeather() {
+          // 由于changeWeather是onClick的回调函数，它不是通过实例调用的，而是直接调用
+          // 再加上类中的方法默认开启了局部严格模式，所以changeWeather中的this是undefined
+          this.setState({
+            isHot: !this.state.isHot,
+          });
+        }
+
         render() {
-          return <h1>Today is {this.state.isHot ? 'Hot' : 'Cold'}</h1>;
+          return (
+            <h1 onClick={this.changeWeather}>
+              Today is {this.state.isHot ? 'Hot' : 'Cold'}
+            </h1>
+          );
         }
       }
 
