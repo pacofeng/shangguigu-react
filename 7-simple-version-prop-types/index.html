@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
+    <script type="text/babel">
+      class Weather extends React.Component {
+        // 类型和必要性的限制
+        static propTypes = {
+          date: PropTypes.string.isRequired,
+          isHot: PropTypes.bool,
+        };
+
+        // 制定默认值
+        static defaultProps = {
+          isHot: true,
+        };
+
+        render() {
+          const { date, isHot } = this.props;
+          return (
+            <h1>
+              {date} is {isHot ? 'Hot' : 'Cold'}
+            </h1>
+          );
+        }
+      }
+
+      const data = {
+        date: '01/01/2022',
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<Weather {...data} />);
+    </script>
+  </body>
+</html>
