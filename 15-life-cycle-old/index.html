@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Parent extends React.Component {
+        state = {
+          name: 'before',
+        };
+
+        updateName = () => {
+          this.setState({
+            name: 'after',
+          });
+        };
+
+        render() {
+          return (
+            <>
+              <Add name={this.state.name} />
+              <button onClick={this.updateName}>Update from Parent</button>
+            </>
+          );
+        }
+      }
+
+      class Add extends React.Component {
+        constructor(props) {
+          console.log('Add constructor...');
+          super(props);
+          this.state = {
+            sum: 0,
+          };
+        }
+
+        add = () => {
+          this.setState({
+            sum: this.state.sum + 1,
+          });
+        };
+
+        unmount = () => {
+          // 卸载组件
+          root.unmount(rootElement);
+        };
+
+        force = () => {
+          this.forceUpdate();
+        };
+
+        // 组件即将要挂载
+        componentWillMount() {
+          console.log('Add componentWillMount...');
+        }
+
+        // 组件挂载完毕
+        componentDidMount() {
+          console.log('Add componentDidMount...');
+        }
+
+        // 组件即将要卸载
+        componentWillUnmount() {
+          console.log('Add componentWillUnmount...');
+        }
+
+        // 组件即将要接收父组件的props
+        componentWillReceiveProps(props) {
+          console.log('Add componentWillReceiveProps...', props);
+        }
+
+        // 组件是否需要更新，不定义该函数的话，默认为true
+        shouldComponentUpdate() {
+          console.log('Add shouldComponentUpdate...');
+          return true;
+        }
+
+        // 组件即将更新
+        componentWillUpdate() {
+          console.log('Add componentWillUpdate...');
+        }
+
+        // 组件更新完毕
+        componentDidUpdate() {
+          console.log('Add componentDidUpdate...');
+        }
+
+        // 渲染组件
+        render() {
+          console.log('Add render...');
+          return (
+            <div>
+              <h1>Sum is {this.state.sum}</h1>
+              <button onClick={this.add}>Add 1</button>
+              <button onClick={this.force}>Force Update</button>
+              <button onClick={this.unmount}>Unmount</button>
+            </div>
+          );
+        }
+      }
+
+      const rootElement = document.getElementById('root');
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<Parent />);
+    </script>
+  </body>
+</html>
