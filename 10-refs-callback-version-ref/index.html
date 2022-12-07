@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Demo extends React.Component {
+        copyValue = () => {
+          this.rightInput.value = this.leftInput.value;
+        };
+
+        saveLeftInput = (current) => (this.leftInput = current);
+        render() {
+          return (
+            <>
+              {/*回调函数外设，组件更新时只会被调用一次*/}
+              <input ref={this.saveLeftInput} type='text' />
+              <button onClick={this.copyValue}>Click Me</button>
+              {/*回调函数内联，组件更新时会被调用两次*/}
+              <input
+                ref={(current) => (this.rightInput = current)}
+                type='text'
+              />
+            </>
+          );
+        }
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<Demo />);
+    </script>
+  </body>
+</html>
