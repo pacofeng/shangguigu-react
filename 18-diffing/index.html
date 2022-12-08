@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello React</title>
+    <style>
+      .news-container {
+        height: 100px;
+        width: 200px;
+        background-color: skyblue;
+        overflow: auto;
+      }
+      .news-item {
+        height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Diffing extends React.Component {
+        state = {
+          dateTime: new Date(),
+          students: [
+            { id: 2, name: 'pp2' },
+            { id: 1, name: 'pp1' },
+          ],
+        };
+
+        componentDidMount() {
+          setInterval(() => {
+            this.setState({ dateTime: new Date() });
+          }, 1000);
+        }
+
+        onAddClick = () => {
+          const len = this.state.students.length + 1;
+          this.setState({
+            students: [{ id: len, name: 'pp' + len }, ...this.state.students],
+          });
+        };
+
+        render() {
+          return (
+            <>
+              <h1>hello</h1>
+              <input type='text' />
+              <div>Time: {this.state.dateTime.toTimeString()}</div>
+
+              <button onClick={this.onAddClick}>Add student</button>
+              <hr />
+              <h2>Index as key</h2>
+              {/* input显示错乱的数据 */}
+              {this.state.students.map((student, index) => (
+                <div key={index}>
+                  {student.name}
+                  <input type='text' />
+                </div>
+              ))}
+              <hr />
+              <h2>Student ID as key</h2>
+              {this.state.students.map((student, index) => (
+                <div key={student.id}>
+                  {student.name} <input type='text' />
+                </div>
+              ))}
+            </>
+          );
+        }
+      }
+
+      const rootElement = document.getElementById('root');
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<Diffing />);
+    </script>
+  </body>
+</html>
