@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 
 app.use((request, response, next) => {
+  console.log('request from: ', request.get('Host'));
+  console.log('request to: ', request.url);
   console.log('server 5000 is being requested...');
   next();
 });
