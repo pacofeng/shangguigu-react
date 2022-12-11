@@ -1,0 +1,23 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import App from './App';
+import store from './redux/store';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
+);
+
+// // 监测redux中的state，如果改变重新渲染App
+// store.subscribe(() => {
+//   root.render(
+//     <React.StrictMode>
+//       <App />
+//     </React.StrictMode>
+//   );
+// });
